@@ -1,4 +1,7 @@
-﻿namespace Logger;
+﻿using System;
+using System.Globalization;
+
+namespace Logger;
 
 public static class BaseLoggerMixins
 {
@@ -13,21 +16,26 @@ public static class BaseLoggerMixins
     public static void Error(this BaseLogger? logger, string message, params object[] args)
     {
         LoggerNullCheck(logger);
-        logger!.Log(LogLevel.Error, string.Format(message, args));
+        string info = string.Format(CultureInfo.CurrentCulture, message, args);
+        logger!.Log(LogLevel.Error, info);
     }
     public static void Warning(this BaseLogger? logger, string message, params object[] args)
     {
         LoggerNullCheck(logger);
-        logger!.Log(LogLevel.Warning, string.Format(message, args));
+        string info = string.Format(CultureInfo.CurrentCulture, message, args);
+        logger!.Log(LogLevel.Warning, info);
     }
     public static void Information(this BaseLogger? logger, string message, params object[] args)
     {
         LoggerNullCheck(logger);
-        logger!.Log(LogLevel.Information, string.Format(message, args));
+        string info = string.Format(CultureInfo.CurrentCulture, message, args);
+        logger!.Log(LogLevel.Information, info);
     }
     public static void Debug(this BaseLogger? logger, string message, params object[] args)
     {
         LoggerNullCheck(logger);
-        logger!.Log(LogLevel.Debug, string.Format(message, args));
+        string info = string.Format(CultureInfo.CurrentCulture, message, args);
+        logger!.Log(LogLevel.Debug, info);
     }
+
 }
