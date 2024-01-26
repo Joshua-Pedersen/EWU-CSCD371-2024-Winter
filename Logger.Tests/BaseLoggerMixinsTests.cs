@@ -23,7 +23,7 @@ public class BaseLoggerMixinsTests
     public void Error_WithData_LogsMessage()
     {
         // Arrange
-        var logger = new TestLogger();
+        TestLogger logger = new TestLogger();
 
         // Act
         logger.Error("Message {0}", 42);
