@@ -7,10 +7,7 @@ public static class BaseLoggerMixins
 {
     public static void LoggerNullCheck(BaseLogger? logger)
     {
-        if (logger is null)
-        {
-            throw new System.ArgumentNullException(nameof(logger));
-        }
+        ArgumentNullException.ThrowIfNull(logger);
     }
     
     public static void Error(this BaseLogger? logger, string message, params object[] args)
