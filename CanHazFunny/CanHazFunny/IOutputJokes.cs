@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CanHazFunny
+namespace CanHazFunny;
+
+internal interface IOutputJokes
 {
-    internal interface IOutputJokes
-    {
-        public void SayJoke(string joke);
-    }
+    public void SayJoke(string joke);
 }
