@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Xunit;
+using Moq;
 
 namespace CanHazFunny.Tests;
 
@@ -9,9 +10,14 @@ public class JesterTests
     [Fact]
     public void GetJoke_CreateJoke_ReturnsJoke()
     {
-        JokeService jokeService = new();
-        string joke = jokeService.GetJoke();
-        Assert.NotNull(joke);
+        var mockJokeService = new Mock<ICreateJokes>();
+        var mockOutput = new Mock<IOutputJokes>();
+        string testJoke = "foo";
+        mockJokeService.SetupSequence(x => x.GetJoke()).Returns(testJoke);
+        Jester jester = new(mockJokeService.Object, mockOutput.Object);
+
+        jester.TellJoke();
+        mockOutput.Verify(x => x.SayJoke(testJoke));
     }
 
     [Fact]
@@ -48,16 +54,14 @@ public class JesterTests
     [Fact]
     public void TellJoke_CreateJoke_DoesNotContainChuckNorris()
     {
-        JokeService jokeService = new();
-        JokeOutput output = new();
-        Jester jester = new(jokeService, output);
-
-        var consoleOut = new StringWriter();
-        Console.SetOut(consoleOut);
+        var mockJokeService = new Mock<ICreateJokes>();
+        var mockOutput = new Mock<IOutputJokes>();
+        string testJoke = "foo";
+        string badJoke = "I dislike Chuck Norris jokes";
+        mockJokeService.SetupSequence(x => x.GetJoke()).Returns(badJoke).Returns(testJoke);
+        Jester jester = new(mockJokeService.Object, mockOutput.Object);
 
         jester.TellJoke();
-        string outputConversion = (consoleOut.ToString()).Replace(System.Environment.NewLine, "");
-
-        Assert.DoesNotContain("Chuck Norris", outputConversion);
+        mockOutput.Verify(x => x.SayJoke(testJoke));
     }
 }

@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CanHazFunny;
 
 public class Jester
 {
-    private JokeService _jokeService;
-    private JokeOutput _jokeOutput;
+    private ICreateJokes _jokeService;
+    private IOutputJokes _jokeOutput;
 
-    public Jester(JokeService createJoke, JokeOutput outputJoke) 
+    public Jester(ICreateJokes createJoke, IOutputJokes outputJoke) 
     {
         _jokeService = createJoke ?? throw new ArgumentNullException(nameof(createJoke));
         _jokeOutput = outputJoke ?? throw new ArgumentNullException(nameof(outputJoke));
