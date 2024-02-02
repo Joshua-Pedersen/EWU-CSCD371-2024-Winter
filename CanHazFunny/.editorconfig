@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# xUnit2006: Do not use invalid string equality check
+dotnet_diagnostic.xUnit2006.severity = suggestion

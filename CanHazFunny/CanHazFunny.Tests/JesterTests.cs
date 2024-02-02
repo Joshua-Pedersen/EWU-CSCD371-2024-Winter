@@ -48,7 +48,7 @@ public class JesterTests
         string outputConversion = (output.ToString()).Replace(System.Environment.NewLine, "");
         
 
-        Assert.Equal(joke, outputConversion);
+        Assert.Equal<string>(joke, outputConversion);
     }
 
     [Fact]
