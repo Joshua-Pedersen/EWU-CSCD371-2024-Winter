@@ -3,6 +3,7 @@ using Xunit;
 using System;
 #nullable enable
 
+namespace Logger.Tests;
 
 public class FullNameTests
 {
@@ -59,5 +60,22 @@ public class FullNameTests
 		Assert.Throws<ArgumentNullException>(() => new FullName(firstName, null!));
 	}
 
+	[Fact]
+	public void FullName_CreatesFullNameWithMiddle_NameMatches()
+	{
+        string testNameString = "Alpha Beta Charlie";
+        FullName testName = new FullName("Alpha", "Charlie", "Beta");
+
+		Assert.Equal(testNameString, testName.Name);
+    }
+
+    [Fact]
+    public void FullName_CreatesFullNameWithOutMiddle_NameMatches()
+    {
+        string testNameString = "Alpha Charlie";
+        FullName testName = new FullName("Alpha", "Charlie");
+
+        Assert.Equal(testNameString, testName.Name);
+    }
 
 }

@@ -1,19 +1,22 @@
-using Logger;
 using System;
 
-public record FullName
+namespace Logger;
+
+public record struct FullName
 {
-	public string FirstName { get; }
-	public string LastName { get; }
-	public string? MiddleName { get; }
+    public string FirstName { get; }
+    public string LastName { get; }
+    public string? MiddleName { get; }
+    public string Name => (MiddleName == null ? $"{FirstName} {LastName}" : $"{FirstName} {MiddleName} {LastName}");
 
+    public FullName(string firstName, string lastName, string? middleName = null)
+    {
+        FirstName = string.IsNullOrWhiteSpace(firstName) ? throw new ArgumentNullException(nameof(firstName)) : firstName;
+        LastName = string.IsNullOrWhiteSpace(lastName) ? throw new ArgumentNullException(nameof(lastName)) : lastName;
+        MiddleName = middleName;
+    }
 
-	public FullName(string firstName, string lastName, string? middleName = null)
-	{
-		FirstName = string.IsNullOrWhiteSpace(firstName) ? throw new ArgumentNullException(nameof(firstName)) : firstName;
-		LastName = string.IsNullOrWhiteSpace(lastName) ? throw new ArgumentNullException(nameof(lastName)) : lastName;
-		MiddleName = middleName;
-	}
+    
 }
 
 // I decided to define FullName as a value type because it repersents a single entity with few attributes.
