@@ -64,7 +64,7 @@ public class FullNameTests
 	public void FullName_CreatesFullNameWithMiddle_NameMatches()
 	{
         string testNameString = "Alpha Beta Charlie";
-        FullName testName = new FullName("Alpha", "Charlie", "Beta");
+        FullName testName = new("Alpha", "Charlie", "Beta");
 
 		Assert.Equal(testNameString, testName.Name);
     }
@@ -73,7 +73,7 @@ public class FullNameTests
     public void FullName_CreatesFullNameWithOutMiddle_NameMatches()
     {
         string testNameString = "Alpha Charlie";
-        FullName testName = new FullName("Alpha", "Charlie");
+        FullName testName = new("Alpha", "Charlie");
 
         Assert.Equal(testNameString, testName.Name);
     }
