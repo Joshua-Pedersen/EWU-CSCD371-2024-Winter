@@ -2,7 +2,7 @@ using System;
 
 namespace Logger;
 
-public record struct FullName
+public readonly record struct FullName
 {
     public string FirstName { get; }
     public string LastName { get; }
