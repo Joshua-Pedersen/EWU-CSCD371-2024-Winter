@@ -14,8 +14,12 @@ public class Node<T>
     public override string? ToString()
     {
         if (_value == null) return null;
-        // might need to change, not sure if this counts as using a BCL
-        else return _value.ToString();
+        
+        else
+        {
+            string contents = $"{_value}";
+            return contents;
+        }
     }
 
     public void Append(T value)

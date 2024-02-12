@@ -16,7 +16,7 @@ namespace GenericsHomework.Tests
 
             // Assert
 
-            Assert.Equal<int>(val, testNode._value);
+            Assert.Equal(val, testNode._value);
         }
         [Fact]
         public void ToString_HasValue_ReturnsString()
@@ -27,7 +27,7 @@ namespace GenericsHomework.Tests
             // Act
             Node<int> testNode = new(val);
 
-            // Assert (not generic but I'm guessing they'll remove that requirement again)
+            // Assert
             Assert.Equal(val.ToString(), testNode.ToString());
         }
 
@@ -43,7 +43,22 @@ namespace GenericsHomework.Tests
             originalNode.Append(val2);
 
             // Assert
-            Assert.Equal<int>(val2, originalNode._next._value);
+            Assert.Equal(val2, originalNode._next._value);
+        }
+
+        [Fact]
+        public void ToString_GivenNode_ReturnsCorrectString()
+        {
+            // Arrange
+            int val = 117;
+            Node<int> testNode = new(val);
+
+            // Act
+            string valString = val.ToString();
+            var toStringOutput = testNode.ToString();
+
+            // Assert
+            Assert.Equal(valString, toStringOutput);
         }
     }
 }
