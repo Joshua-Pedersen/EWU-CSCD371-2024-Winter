@@ -47,6 +47,26 @@ namespace GenericsHomework.Tests
         }
 
         [Fact]
+        public void Append_AppendMultipleNodes_ContainCorrectValues()
+        {
+            // Arrange
+            int val = 42;
+            int val2 = 117;
+            int val3 = 19;
+            Node<int> originalNode = new(val);
+
+            // Act
+            originalNode.Append(val2);
+            originalNode.Append(val3);
+
+            // Assert
+            Assert.Equal(val, originalNode._value);
+            Assert.Equal(val2, originalNode._next._value);
+            Assert.Equal(val3, originalNode._next._next._value);
+            Assert.Equal(val, originalNode._next._next._next._value);
+        }
+
+        [Fact]
         public void ToString_GivenNode_ReturnsCorrectString()
         {
             // Arrange

@@ -31,8 +31,10 @@ public class Node<T>
         Node<T> newNode = new(value);
         Node<T> cur = this;
 
-        newNode._next = cur;
+        while (cur._next != this) { cur = cur._next; }
+
         cur._next = newNode;
+        newNode._next = this;
     }
 
 }
