@@ -80,5 +80,112 @@ namespace GenericsHomework.Tests
             // Assert
             Assert.Equal(valString, toStringOutput);
         }
+
+
+        [Fact]
+        public void Append_AppendAlreadyExistingNode_ThrowsException()
+        {
+            // Arrange
+            Node<int> node = new(1);
+            node.Append(2);
+            node.Append(3);
+
+
+            // Act and Assert
+            Assert.Throws<ArgumentException>(() => node.Append(1));
+            Assert.Throws<ArgumentException>(() => node.Append(3));
+        }
+
+
+        [Fact]
+        public void Exists_ElementAlreadyExists_ReturnsTrue()
+        {
+            // Arrange
+            Node<int> node = new(1);
+            node.Append(2);
+            node.Append(3);
+
+            // Act 
+            bool result = node.Exists(2);
+
+            // Assert 
+            Assert.True(result);
+        }
+
+
+        [Fact]
+        public void Exists_ElementDoesntExist_ReturnFalse()
+        {
+            // Arrange
+            Node<int> node = new(1);
+            node.Append(2);
+            node.Append(3);
+
+            // Act 
+            bool result = node.Exists(4);
+
+            // Assert 
+            Assert.False(result);
+        }
+
+
+        [Fact]
+        public void Exists_SingleElementList_ReturnsTrue()
+        {
+            // Arrange
+            Node<int> node = new(1);
+
+            // Act 
+            bool result = node.Exists(1);
+
+            // Assert 
+            Assert.True(result);
+        }
+
+
+        [Fact]
+        public void Exists_SingleElementList_ReturnsFalse()
+        {
+            // Arrange
+            Node<int> node = new(1);
+
+            // Act 
+            bool result = node.Exists(2);
+
+            // Assert 
+            Assert.False(result);
+        }
+
+
+        [Fact]
+        public void Clear_RemovesAllItems_ContainsOnlyFirstValue()
+        {
+            // Arrange
+            Node<int> node = new(1);
+            node.Append(2);
+            node.Append(3);
+
+            // Act 
+            node.Clear();
+
+            // Assert 
+            Assert.Equal(1, node._value);
+            Assert.Same(node, node._next);
+        }
+
+
+        [Fact]
+        public void Clear_SingleElementList_NothingRemoved()
+        {
+            // Arrange
+            Node<int> node = new(1);
+
+            // Act 
+            node.Clear();
+
+            // Assert 
+            Assert.Equal(1, node._value);
+            Assert.Same(node, node._next);
+        }
     }
 }
