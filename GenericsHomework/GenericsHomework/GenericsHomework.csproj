@@ -1,0 +1,7 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<None Remove="Directory.Build.Props"/>
+	</ItemGroup>
+
+</Project>
