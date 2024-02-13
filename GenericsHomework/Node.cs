@@ -2,18 +2,18 @@
 
 public class Node<T>
 {
-    public T _value;
-    public Node<T> _next { get; private set; }
+    public T Value { get; set; }
+    public Node<T> Next { get; private set; }
 
     public Node(T value)
     {
-        _value = value;
-        _next = this;
+        Value = value;
+        Next = this;
     }
 
     public override string ToString()
     {
-            string contents = $"{_value}";
+            string contents = $"{Value}";
             return contents;
     }
 
@@ -29,16 +29,16 @@ public class Node<T>
         Node<T> newNode = new(value);
         Node<T> cur = this;
 
-        while (cur._next != this) { cur = cur._next; }
+        while (cur.Next != this) { cur = cur.Next; }
 
-        cur._next = newNode;
-        newNode._next = this;
+        cur.Next = newNode;
+        newNode.Next = this;
     }
 
     public void Clear()
     {
         // base case if list is a single element
-        if(this._next == this)
+        if(this.Next == this)
         {
             return;
         }
@@ -47,16 +47,16 @@ public class Node<T>
         Node<T> curNode = this;
 
         // Loop through list until your at the node before this
-        while (curNode._next != this)
+        while (curNode.Next != this)
         {
-            curNode = curNode._next;
+            curNode = curNode.Next;
         }
 
         // Set node before this to this's next node
-        curNode._next = this._next;
+        curNode.Next = this.Next;
 
         // Clear by setting the node to itself 
-        this._next = this;
+        this.Next = this;
 
 
         // As long as there is no external references you do not need to worry about garbage
@@ -75,23 +75,23 @@ public class Node<T>
         // intial test to make sure the first node does not have the given value.
 
         // Use of null forgiveness since doc states validation on node values is not nessasary
-        if(curNode._value!.Equals(value))
+        if(curNode.Value!.Equals(value))
         {
             return true;
         }
 
         // increment current node so we can go into loop. 
-        curNode = curNode._next;
+        curNode = curNode.Next;
 
         // loop until initial node, if values are equal return true, otherwise return false.
         while(curNode != this)
         {
             // Use of null forgiveness since doc states validation on node values is not nessasary
-            if (curNode._value!.Equals(value))
+            if (curNode.Value!.Equals(value))
             {
                 return true;
             }
-            curNode = curNode._next;
+            curNode = curNode.Next;
         }
 
         return false;

@@ -16,7 +16,7 @@ namespace GenericsHomework.Tests
 
             // Assert
 
-            Assert.Equal(val, testNode._value);
+            Assert.Equal(val, testNode.Value);
         }
         [Fact]
         public void ToString_HasValue_ReturnsString()
@@ -43,7 +43,7 @@ namespace GenericsHomework.Tests
             originalNode.Append(val2);
 
             // Assert
-            Assert.Equal(val2, originalNode._next._value);
+            Assert.Equal(val2, originalNode.Next.Value);
         }
 
         [Fact]
@@ -60,10 +60,10 @@ namespace GenericsHomework.Tests
             originalNode.Append(val3);
 
             // Assert
-            Assert.Equal(val, originalNode._value);
-            Assert.Equal(val2, originalNode._next._value);
-            Assert.Equal(val3, originalNode._next._next._value);
-            Assert.Equal(val, originalNode._next._next._next._value);
+            Assert.Equal(val, originalNode.Value);
+            Assert.Equal(val2, originalNode.Next.Value);
+            Assert.Equal(val3, originalNode.Next.Next.Value);
+            Assert.Equal(val, originalNode.Next.Next.Next.Value);
         }
 
         [Fact]
@@ -169,8 +169,8 @@ namespace GenericsHomework.Tests
             node.Clear();
 
             // Assert 
-            Assert.Equal(1, node._value);
-            Assert.Same(node, node._next);
+            Assert.Equal(1, node.Value);
+            Assert.Same(node, node.Next);
         }
 
 
@@ -184,8 +184,8 @@ namespace GenericsHomework.Tests
             node.Clear();
 
             // Assert 
-            Assert.Equal(1, node._value);
-            Assert.Same(node, node._next);
+            Assert.Equal(1, node.Value);
+            Assert.Same(node, node.Next);
         }
     }
 }
