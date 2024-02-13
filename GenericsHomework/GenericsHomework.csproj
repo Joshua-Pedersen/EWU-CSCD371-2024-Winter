@@ -6,5 +6,5 @@
 	<ItemGroup>
 		<None Remove="Directory.Build.Props"/>
 	</ItemGroup>
->
+
 </Project>
