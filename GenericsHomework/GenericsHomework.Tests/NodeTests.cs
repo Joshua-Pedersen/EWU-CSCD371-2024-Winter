@@ -92,8 +92,8 @@ namespace GenericsHomework.Tests
 
 
             // Act and Assert
-            Assert.Throws<ArgumentException>(() => node.Append(1));
-            Assert.Throws<ArgumentException>(() => node.Append(3));
+            Assert.Throws<System.ArgumentException>(() => node.Append(1));
+            Assert.Throws<System.ArgumentException>(() => node.Append(3));
         }
 
 

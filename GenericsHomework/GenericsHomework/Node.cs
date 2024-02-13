@@ -11,23 +11,18 @@ public class Node<T>
         _next = this;
     }
 
-    public override string? ToString()
+    public override string ToString()
     {
-        if (_value == null) return null;
-        
-        else
-        {
             string contents = $"{_value}";
             return contents;
-        }
     }
 
     public void Append(T value)
     {
         // To add once Exists method is here
-        if Exists(value) 
+        if (Exists(value)) 
         {
-            throw new ArgumentException("Duplicate Value");
+            throw new System.ArgumentException("Duplicate Value");
         }
          
 
@@ -77,8 +72,10 @@ public class Node<T>
         Node<T> curNode = this;
 
         // since curNode cannot equal this/first node in the loop, we need to do an 
-        // intial test to make sure the first node does not have the given value. 
-        if(curNode._value == value)
+        // intial test to make sure the first node does not have the given value.
+
+        // Use of null forgiveness since doc states validation on node values is not nessasary
+        if(curNode._value!.Equals(value))
         {
             return true;
         }
@@ -89,7 +86,8 @@ public class Node<T>
         // loop until initial node, if values are equal return true, otherwise return false.
         while(curNode != this)
         {
-            if(Object.Equals(curNode._value, value))
+            // Use of null forgiveness since doc states validation on node values is not nessasary
+            if (curNode._value!.Equals(value))
             {
                 return true;
             }
