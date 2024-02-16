@@ -27,11 +27,11 @@ public class Node<T>
          
 
         Node<T> newNode = new(value);
-        Node<T> cur = this;
+        Node<T> currentNode = this;
 
-        while (cur.Next != this) { cur = cur.Next; }
+        while (currentNode.Next != this) { currentNode = currentNode.Next; }
 
-        cur.Next = newNode;
+        currentNode.Next = newNode;
         newNode.Next = this;
     }
 
@@ -44,16 +44,16 @@ public class Node<T>
         }
 
         // Reference of next node before clearing 
-        Node<T> curNode = this;
+        Node<T> currentNode = this;
 
         // Loop through list until your at the node before this
-        while (curNode.Next != this)
+        while (currentNode.Next != this)
         {
-            curNode = curNode.Next;
+            currentNode = currentNode.Next;
         }
 
         // Set node before this to this's next node
-        curNode.Next = this.Next;
+        currentNode.Next = this.Next;
 
         // Clear by setting the node to itself 
         this.Next = this;
@@ -69,29 +69,29 @@ public class Node<T>
     public bool Exists(T value)
     {
         // create node to navigate with starting with the first node
-        Node<T> curNode = this;
+        Node<T> currentNode = this;
 
         // since curNode cannot equal this/first node in the loop, we need to do an 
         // intial test to make sure the first node does not have the given value.
 
         // Use of null forgiveness since doc states validation on node values is not nessasary
-        if(curNode.Value!.Equals(value))
+        if(currentNode.Value!.Equals(value))
         {
             return true;
         }
 
         // increment current node so we can go into loop. 
-        curNode = curNode.Next;
+        currentNode = currentNode.Next;
 
         // loop until initial node, if values are equal return true, otherwise return false.
-        while(curNode != this)
+        while(currentNode != this)
         {
             // Use of null forgiveness since doc states validation on node values is not nessasary
-            if (curNode.Value!.Equals(value))
+            if (currentNode.Value!.Equals(value))
             {
                 return true;
             }
-            curNode = curNode.Next;
+            currentNode = curNode.Next;
         }
 
         return false;
