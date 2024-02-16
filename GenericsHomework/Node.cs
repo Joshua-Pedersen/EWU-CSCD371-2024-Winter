@@ -13,8 +13,8 @@ public class Node<T>
 
     public override string ToString()
     {
-            string contents = $"{Value}";
-            return contents;
+        string contents = $"{Value}";
+        return contents;
     }
 
     public void Append(T value)
@@ -48,7 +48,7 @@ public class Node<T>
         // Reference of next node before clearing 
         Node<T> currentNode = this;
 
-        // Loop through list until your at the node before this
+        // Loop through list until you're at the node before this
         while (currentNode.Next != this)
         {
             currentNode = currentNode.Next;
