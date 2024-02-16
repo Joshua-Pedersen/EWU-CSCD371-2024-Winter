@@ -19,7 +19,6 @@ public class Node<T>
 
     public void Append(T value)
     {
-        // To add once Exists method is here
         if (Exists(value)) 
         {
             throw new System.ArgumentException("Duplicate Value");
