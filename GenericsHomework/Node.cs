@@ -91,7 +91,7 @@ public class Node<T>
             {
                 return true;
             }
-            currentNode = curNode.Next;
+            currentNode = currentNode.Next;
         }
 
         return false;
