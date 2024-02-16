@@ -28,7 +28,10 @@ public class Node<T>
         Node<T> newNode = new(value);
         Node<T> currentNode = this;
 
-        while (currentNode.Next != this) { currentNode = currentNode.Next; }
+        while (currentNode.Next != this) 
+        { 
+            currentNode = currentNode.Next; 
+        }
 
         currentNode.Next = newNode;
         newNode.Next = this;
