@@ -35,7 +35,7 @@ public class Calculator
         throw new ArgumentException("Cannot Divide by zero");
       }
 
-      return a / b; 
+      return (double) a / b; 
     }
 
 

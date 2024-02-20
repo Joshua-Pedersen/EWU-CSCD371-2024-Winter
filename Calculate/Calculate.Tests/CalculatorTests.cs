@@ -10,7 +10,7 @@ public class CalculatorTests
   [InlineData('+', 3, 4, 7)]
   [InlineData('-', 8, 2, 6)]
   [InlineData('*', 5, 6, 30)]
-  [InlineData('/', 9, 3, 3)]
+  [InlineData('/', 6, 4, 1.5)]
   public void MathematicalOperations_ReturnsCorrectResult(char mathSymbol, int operand1, int operand2, double resultsExpected)
   {
     // Arrange
