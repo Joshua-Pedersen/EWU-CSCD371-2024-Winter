@@ -10,6 +10,26 @@ public class Program
 
     public static void Main(string[] args)
     {
+        Program program = new();
+        Calculator calculator = new();
+        string? input;
 
+        do
+        {
+            do
+            {
+                program.WriteLine("Enter an equation in the format 'x + y' \n or enter 'quit' to quit.");
+                input = program.ReadLine();
+            } while (input == null || input == "");
+
+            if (input != "quit")
+            {
+                if (calculator.TryCalculate(input, out double output))
+                {
+                    program.WriteLine(input + " = " + output);
+                } else { program.WriteLine("Invalid equation"); }
+            }
+
+        } while (input != "quit");
     }
 }
