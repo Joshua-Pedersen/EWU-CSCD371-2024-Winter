@@ -1,4 +1,6 @@
 using Xunit;
+using System;
+using System.IO;
 
 namespace Calculate.Tests;
 
