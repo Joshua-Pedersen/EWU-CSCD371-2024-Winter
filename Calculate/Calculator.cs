@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Calculator
 {
-    public readonly IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations = 
+    private readonly IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations = 
       new Dictionary<char, Func<int, int, double>>
     { 
       { '+', Add },
@@ -37,15 +37,6 @@ public class Calculator
 
       return (double) a / b; 
     }
-
-
-
-   /*
-    public static Func<int, int, double> Add { get; set; } = (valueX, valueY) => valueX + valueY;
-    public static Func<int, int, double> Subtract { get; set; } = (valueX, valueY) => valueX - valueY;
-    public static Func<int, int, double> Multiple { get; set; } = (valueX, valueY) => valueX * valueY;
-    public static Func<int, int, double> Divide { get; set; } = (valueX, valueY) => valueX / valueY;
-*/
 
     
     public bool TryCalculate(string input, out double output)
@@ -86,18 +77,4 @@ public class Calculator
         // Bad Symbol
         return false;
     }
-  
-
 }
-
-/*
-public static class HelperMethod
-{
-    public static bool IsInt(this string s)
-    {
-      int x = 0;
-      return int.TryParse(s, out x);
-    }
-}
-*/
-
