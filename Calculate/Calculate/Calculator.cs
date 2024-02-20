@@ -51,7 +51,7 @@ public class Calculator
     public bool TryCalculate(string input, out double output)
     {
         output = 0;
-        /*
+        
 
         // Split up the input
         string[] parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -64,25 +64,25 @@ public class Calculator
 
         // Make sure operands are integers
         int opperand1, opperand2;
-        //if((!int.TryParse(parts[0], out opperand1)) || (!int.TryParse(parts[2]), out opperand2))
-        if(!parts[0].IsInt || !parts[2].IsInt)
+        
+        if((!int.TryParse(parts[0], out opperand1)) || (!int.TryParse(parts[2], out opperand2)))
         {
           return false;
         }
 
         // Get operator
-        char mathSymbol = parts[1];
+        char mathSymbol = parts[1][0];
 
         // Make sure symbol is in the Dictionary
         if (MathematicalOperations.TryGetValue(mathSymbol, out var operation))
         {
           // Get result if in Dictionary
-          result = operation(opperand1, opperand2);
+          output = operation(opperand1, opperand2);
           
           return true;
         }
 
-        */
+        
         // Bad Symbol
         return false;
     }
@@ -100,3 +100,4 @@ public static class HelperMethod
     }
 }
 */
+

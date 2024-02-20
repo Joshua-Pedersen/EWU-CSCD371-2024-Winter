@@ -25,13 +25,61 @@ public class CalculatorTests
 
 
   [Fact]
-  public void Divide_ByZero_ThrowsException()
+  public void MathematicalOperations_Divide_ByZero_ThrowsException()
   {
     // Arrange
     Calculator calculator = new();
 
     // Act & Assert
     Assert.Throws<ArgumentException>(() => calculator.MathematicalOperations['/'](1, 0));
+  }
+
+
+
+  [Theory]
+  [InlineData("1 + 2", 3)]
+  [InlineData("2 - 1", 1)]
+  [InlineData("2 * 2", 4)]
+  [InlineData("4 / 2", 2)]
+  public void TryCalculate_ValidInputs_Succeeds(string inputs, double correctOutput)
+  {
+    // Arrange
+    Calculator calculator = new();
+
+    // Act
+    var result = calculator.TryCalculate(inputs, out double output);
+
+    // Assert
+    Assert.True(result);
+    Assert.Equal(correctOutput, output);
+  }
+
+
+  [Theory]
+  [InlineData("5 / 0")]
+  public void TryCalculate_DivideByZero_ThrowsException(string input)
+  {
+    // Arrange 
+    Calculator calculator = new();
+
+    // Act & Assert
+    Assert.Throws<ArgumentException>(() => calculator.TryCalculate(input, out double output));
+  }
+
+
+  [Theory]
+  [InlineData("invalid input")]
+  [InlineData("2 +")]
+  public void TryCalculate_InvalidInputs_IsFalse(string input)
+  {
+    // Arrange
+    Calculator calculator = new();
+
+    // Act
+    var result = calculator.TryCalculate(input, out double output);
+
+    // Assert
+    Assert.False(result);
   }
 
 }
