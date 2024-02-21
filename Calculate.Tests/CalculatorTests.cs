@@ -5,35 +5,52 @@ namespace Calculate.Tests;
 
 public class CalculatorTests
 {
-
-  [Theory]
-  [InlineData('+', 3, 4, 7)]
-  [InlineData('-', 8, 2, 6)]
-  [InlineData('*', 5, 6, 30)]
-  [InlineData('/', 6, 4, 1.5)]
-  public void MathematicalOperations_ReturnsCorrectResult(char mathSymbol, int operand1, int operand2, double resultsExpected)
+  [Fact]
+  public void Add_ValidInput_Success()
   {
-    // Arrange
-    Calculator calculator = new();
-
-    // Act
-    var result = calculator.MathematicalOperations[mathSymbol](operand1, operand2);
+    // Arrange & Act
+    var result = Calculator.Add(1, 2);
 
     // Assert
-    Assert.Equal(resultsExpected, result);
+    Assert.Equal(3, result);
   }
-
 
   [Fact]
-  public void MathematicalOperations_Divide_ByZero_ThrowsException()
+  public void Subtract_ValidInput_Success()
   {
-    // Arrange
-    Calculator calculator = new();
-
-    // Act & Assert
-    Assert.Throws<ArgumentException>(() => calculator.MathematicalOperations['/'](1, 0));
+    // Arrange & Act
+    var result = Calculator.Subtract(3, 2);
+    
+    // Assert
+    Assert.Equal(1, result);
   }
 
+  [Fact]
+  public void Multiple_ValidInput_Success()
+  {
+    // Arrange & Act
+    var result = Calculator.Multiple(3, 2);
+    
+    // Assert
+    Assert.Equal(6, result);
+  }
+
+  [Fact]
+  public void Divide_ValidInput_Success()
+  {
+    // Arrange & Act
+    var result = Calculator.Divide(4, 2);
+    
+    // Assert
+    Assert.Equal(2, result);
+  }
+
+  [Fact]
+  public void Divide_InvalidInput_ThrowsException()
+  {
+    // Arrange & Act & Assert
+    Assert.Throws<ArgumentException>(() => Calculator.Divide(4, 0));
+  }
 
 
   [Theory]
