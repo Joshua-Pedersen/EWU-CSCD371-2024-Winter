@@ -39,7 +39,7 @@ public class Calculator
     }
 
     
-    public bool TryCalculate(string input, out double output)
+    public static bool TryCalculate(string input, out double output)
     {
         output = 0;
         

@@ -61,10 +61,10 @@ public class CalculatorTests
   public void TryCalculate_ValidInputs_Succeeds(string inputs, double correctOutput)
   {
     // Arrange
-    Calculator calculator = new();
+    //Calculator calculator = new();
 
     // Act
-    var result = calculator.TryCalculate(inputs, out double output);
+    var result = Calculator.TryCalculate(inputs, out double output);
 
     // Assert
     Assert.True(result);
@@ -77,10 +77,10 @@ public class CalculatorTests
   public void TryCalculate_DivideByZero_ThrowsException(string input)
   {
     // Arrange 
-    Calculator calculator = new();
+    //Calculator calculator = new();
 
     // Act & Assert
-    Assert.Throws<ArgumentException>(() => calculator.TryCalculate(input, out double output));
+    Assert.Throws<ArgumentException>(() => Calculator.TryCalculate(input, out double output));
   }
 
 
@@ -90,10 +90,10 @@ public class CalculatorTests
   public void TryCalculate_InvalidInputs_IsFalse(string input)
   {
     // Arrange
-    Calculator calculator = new();
+    //Calculator calculator = new();
 
     // Act
-    var result = calculator.TryCalculate(input, out double output);
+    var result = Calculator.TryCalculate(input, out double output);
 
     // Assert
     Assert.False(result);

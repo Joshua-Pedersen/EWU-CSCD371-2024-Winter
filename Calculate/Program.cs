@@ -24,7 +24,7 @@ public class Program
 
             if (input != "quit")
             {
-                if (calculator.TryCalculate(input, out double output))
+                if (Calculator.TryCalculate(input, out double output))
                 {
                     program.WriteLine(input + " = " + output);
                 } else { program.WriteLine("Invalid equation"); }
