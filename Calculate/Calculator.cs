@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Calculator
 {
-    private readonly IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations = 
+    public readonly IReadOnlyDictionary<char, Func<int, int, double>> MathematicalOperations = 
       new Dictionary<char, Func<int, int, double>>
     { 
       { '+', Add },
