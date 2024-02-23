@@ -61,8 +61,6 @@ public class CalculatorTests
   public void TryCalculate_ValidInputs_Succeeds(string inputs, double correctOutput)
   {
     // Arrange
-    //Calculator calculator = new();
-
     // Act
     bool result = Calculator.TryCalculate(inputs, out double output);
 
@@ -77,8 +75,6 @@ public class CalculatorTests
   public void TryCalculate_DivideByZero_ThrowsException(string input)
   {
     // Arrange 
-    //Calculator calculator = new();
-
     // Act & Assert
     Assert.Throws<ArgumentException>(() => Calculator.TryCalculate(input, out double output));
   }
@@ -90,8 +86,6 @@ public class CalculatorTests
   public void TryCalculate_InvalidInputs_IsFalse(string input)
   {
     // Arrange
-    //Calculator calculator = new();
-
     // Act
     bool result = Calculator.TryCalculate(input, out double output);
 

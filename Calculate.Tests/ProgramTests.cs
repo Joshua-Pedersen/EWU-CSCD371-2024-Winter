@@ -55,8 +55,7 @@ public class ProgramTests
         Assert.Null(testProg.ReadLine());
     }
 
-/* This library don't work, tried
- * 
+/* This library don't work, tried - I tried as well and had the same problem -Conner 
     [Fact]
     public void Main_SampleUserInteraction_Success()
     {
@@ -66,5 +65,5 @@ public class ProgramTests
 
         ConsoleAssert.Expect(view, Program.Main);
     }
-*/
+    */
 }
