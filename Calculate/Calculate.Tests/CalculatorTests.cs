@@ -9,7 +9,7 @@ public class CalculatorTests
   public void Add_ValidInput_Success()
   {
     // Arrange & Act
-    var result = Calculator.Add(1, 2);
+    double result = Calculator.Add(1, 2);
 
     // Assert
     Assert.Equal(3, result);
@@ -19,7 +19,7 @@ public class CalculatorTests
   public void Subtract_ValidInput_Success()
   {
     // Arrange & Act
-    var result = Calculator.Subtract(3, 2);
+    double result = Calculator.Subtract(3, 2);
     
     // Assert
     Assert.Equal(1, result);
@@ -29,7 +29,7 @@ public class CalculatorTests
   public void Multiple_ValidInput_Success()
   {
     // Arrange & Act
-    var result = Calculator.Multiple(3, 2);
+    double result = Calculator.Multiple(3, 2);
     
     // Assert
     Assert.Equal(6, result);
@@ -39,7 +39,7 @@ public class CalculatorTests
   public void Divide_ValidInput_Success()
   {
     // Arrange & Act
-    var result = Calculator.Divide(4, 2);
+    double result = Calculator.Divide(4, 2);
     
     // Assert
     Assert.Equal(2, result);
@@ -64,7 +64,7 @@ public class CalculatorTests
     //Calculator calculator = new();
 
     // Act
-    var result = Calculator.TryCalculate(inputs, out double output);
+    bool result = Calculator.TryCalculate(inputs, out double output);
 
     // Assert
     Assert.True(result);
@@ -93,7 +93,7 @@ public class CalculatorTests
     //Calculator calculator = new();
 
     // Act
-    var result = Calculator.TryCalculate(input, out double output);
+    bool result = Calculator.TryCalculate(input, out double output);
 
     // Assert
     Assert.False(result);

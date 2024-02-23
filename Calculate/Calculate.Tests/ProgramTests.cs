@@ -1,6 +1,7 @@
 using Xunit;
 using System;
 using System.IO;
+using IntelliTect.TestTools.Console;
 
 namespace Calculate.Tests;
 
@@ -39,4 +40,31 @@ public class ProgramTests
         // Assert
         Assert.Equal(testMessage, readString);
     }
+
+    [Fact]
+    public void ReadLine_EmptyInput_IsNull()
+    {
+        // Arrange
+        StringReader input = new("");
+        Console.SetIn(input);
+
+        // Act
+        Program testProg = new();
+
+        // Assert
+        Assert.Null(testProg.ReadLine());
+    }
+
+/* This library don't work, tried
+ * 
+    [Fact]
+    public void Main_SampleUserInteraction_Success()
+    {
+        string view = @"Enter an equation or enter 'quit' <<2 + 2
+>>
+2 + 2 = 4";
+
+        ConsoleAssert.Expect(view, Program.Main);
+    }
+*/
 }

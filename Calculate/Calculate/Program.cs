@@ -1,5 +1,4 @@
-﻿
-namespace Calculate;
+﻿namespace Calculate;
 
 public class Program
 {
@@ -18,7 +17,7 @@ public class Program
         {
             do
             {
-                program.WriteLine("Enter an equation in the format 'x + y' \n or enter 'quit' to quit.");
+                program.WriteLine("Enter an equation or enter 'quit' ");
                 input = program.ReadLine();
             } while (input == null || input == "");
 
