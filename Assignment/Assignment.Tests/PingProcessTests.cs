@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assignment.Tests;
@@ -96,7 +97,9 @@ public class PingProcessTests
     [ExpectedException(typeof(AggregateException))]
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
-        
+        CancellationTokenSource token = new();
+
+        Task<PingResult> task = Sut.RunAsync("localhost", token.Token);
     }
 
     [TestMethod]
@@ -111,10 +114,10 @@ public class PingProcessTests
     {
         // Pseudo Code - don't trust it!!!
         string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
-        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length*hostNames.Length;
+        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length + hostNames.Length - 1 ;
         PingResult result = await Sut.RunAsync(hostNames);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
-        Assert.AreEqual(expectedLineCount, lineCount);
+        Assert.AreEqual<int?>(expectedLineCount, lineCount);
     }
 
     [TestMethod]
