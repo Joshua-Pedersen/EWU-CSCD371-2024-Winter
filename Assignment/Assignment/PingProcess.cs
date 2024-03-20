@@ -39,6 +39,7 @@ public class PingProcess
             PingResult result = await Task.Run(() => RunTaskAsync(hostNameOrAddress), cancellationToken);
             return result;
         } catch (OperationCanceledException e) { throw new AggregateException(e); }
+        catch (Exception e) { throw new AggregateException(e); }
         
     }
 
@@ -68,9 +69,7 @@ public class PingProcess
     async public Task<PingResult> RunLongRunningAsync(
         string hostNameOrAddress, CancellationToken cancellationToken = default)
     {
-        Task task = null!;
-        await task;
-        throw new NotImplementedException();
+        return await RunAsync(hostNameOrAddress, cancellationToken);
     }
 
     private Process RunProcessInternal(
