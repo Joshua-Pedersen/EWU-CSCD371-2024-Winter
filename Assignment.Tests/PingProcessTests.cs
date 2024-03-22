@@ -31,7 +31,7 @@ public class PingProcessTests
     public void Run_GoogleDotCom_Success()
     {
         string host = (Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == null) ? "-c 4 google.com" : "-c 4 localhost";
-        int exitCode = Sut.Run("host").ExitCode;
+        int exitCode = Sut.Run(host).ExitCode;
         Assert.AreEqual(0, exitCode);
     }
 
