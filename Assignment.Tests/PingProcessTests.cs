@@ -39,11 +39,11 @@ public class PingProcessTests
     [TestMethod]
     public void Run_InvalidAddressOutput_Success()
     {
-        (int exitCode, string? stdOutput) = Sut.Run("badaddress");
+        (int exitCode, string? stdOutput, string? stdErr) = Sut.Run("badaddress");
         Assert.IsFalse(string.IsNullOrWhiteSpace(stdOutput));
         stdOutput = WildcardPattern.NormalizeLineEndings(stdOutput!.Trim());
         Assert.AreEqual<string?>(
-            "Ping request could not find host badaddress. Please check the name and try again.".Trim(),
+            "ping: badassress: Temporary failure in name resolution".Trim(),
             stdOutput,
             $"Output is unexpected: {stdOutput}");
         Assert.AreEqual(2, exitCode);
@@ -63,7 +63,7 @@ public class PingProcessTests
         // Test Sut.RunTaskAsync("localhost");
 
         Task<PingResult> testTask = Sut.RunTaskAsync("-c 4 localhost");
-
+        testTask.Start();
         AssertValidPingOutput(testTask.Result);
 
     }

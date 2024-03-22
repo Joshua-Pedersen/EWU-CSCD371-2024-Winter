@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Assignment;
 
-public record struct PingResult(int ExitCode, string? StdOutput);
+public record struct PingResult(int ExitCode, string? StdOutput, string? StdError);
 
 public class PingProcess
 {
@@ -17,12 +17,18 @@ public class PingProcess
 
     public PingResult Run(string hostNameOrAddress)
     {
-        StartInfo.Arguments = hostNameOrAddress;
-        StringBuilder? stringBuilder = null;
+        string pingArg = Environment.OSVersion.Platform is PlatformID.Unix ? "-c" : "-n";
+        StartInfo.Arguments = $"{pingArg} 4 {hostNameOrAddress}";
+        StringBuilder? stdOutput = null;
+        StringBuilder? stdErr = null;
+
         void updateStdOutput(string? line) =>
-            (stringBuilder??=new StringBuilder()).AppendLine(line);
-        Process process = RunProcessInternal(StartInfo, updateStdOutput, default, default);
-        return new PingResult( process.ExitCode, stringBuilder?.ToString());
+            (stdOutput??=new StringBuilder()).AppendLine(line);
+        void updateError(string? line) =>
+            (stdErr ??=new StringBuilder()).AppendLine(line);
+
+        Process process = RunProcessInternal(StartInfo, updateStdOutput, updateError, default);
+        return new PingResult( process.ExitCode, stdOutput?.ToString(), stdErr?.ToString());
     }
 
     public Task<PingResult> RunTaskAsync(string hostNameOrAddress)
@@ -63,7 +69,7 @@ public class PingProcess
 
         await Task.WhenAll(all);
         
-        return new PingResult(exitcodes, stringBuilder?.ToString().Trim());
+        return new PingResult(exitcodes, stringBuilder?.ToString().Trim(), default);
     }
 
     
@@ -79,7 +85,7 @@ public class PingProcess
             return RunProcessInternal(startInfo, updateStdOutput, default, cancellationToken).ExitCode;
         }, cancellationToken, TaskCreationOptions.LongRunning, TaskScheduler.Current);
         
-        return new PingResult(task, stringBuilder?.ToString().Trim());
+        return new PingResult(task, stringBuilder?.ToString().Trim(), default);
     }
 
     private Process RunProcessInternal(
