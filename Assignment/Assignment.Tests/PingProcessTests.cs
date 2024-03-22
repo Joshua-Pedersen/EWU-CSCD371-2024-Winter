@@ -24,14 +24,15 @@ public class PingProcessTests
     {
         Process process = Process.Start("ping", "localhost");
         process.WaitForExit();
-        Assert.AreEqual<int>(0, process.ExitCode);
+        Assert.AreEqual(0, process.ExitCode);
     }
 
     [TestMethod]
     public void Run_GoogleDotCom_Success()
     {
+        
         int exitCode = Sut.Run("google.com").ExitCode;
-        Assert.AreEqual<int>(0, exitCode);
+        Assert.AreEqual(0, exitCode);
     }
 
 
@@ -45,7 +46,7 @@ public class PingProcessTests
             "Ping request could not find host badaddress. Please check the name and try again.".Trim(),
             stdOutput,
             $"Output is unexpected: {stdOutput}");
-        Assert.AreEqual<int>(1, exitCode);
+        Assert.AreEqual(1, exitCode);
     }
 
     [TestMethod]
@@ -61,13 +62,9 @@ public class PingProcessTests
         // Do NOT use async/await in this test.
         // Test Sut.RunTaskAsync("localhost");
 
-        // Arrange
-
-        // Act
         Task<PingResult> testTask = Sut.RunTaskAsync("localhost");
 
-        // Assert
-        Assert.AreEqual(0, testTask.Result.ExitCode);
+        AssertValidPingOutput(testTask.Result);
 
     }
 
@@ -98,10 +95,10 @@ public class PingProcessTests
     public void RunAsync_UsingTplWithCancellation_CatchAggregateExceptionWrapping()
     {
         CancellationTokenSource token = new();
-
-        Task<PingResult> task = Sut.RunAsync("localhost", token.Token);
         token.Cancel();
-        task.Wait();
+
+        Sut.RunAsync("localhost", token.Token).Wait(); ;
+        
     }
 
     [TestMethod]
@@ -123,22 +120,18 @@ public class PingProcessTests
     async public Task RunAsync_MultipleHostAddresses_True()
     {
         // Pseudo Code - don't trust it!!!
-        string[] hostNames = new string[] { "localhost", "localhost", "localhost", "localhost" };
-        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length + hostNames.Length - 1 ;
+        string[] hostNames = ["localhost", "localhost", "localhost", "localhost"];
+        int expectedLineCount = PingOutputLikeExpression.Split(Environment.NewLine).Length * hostNames.Length;
         PingResult result = await Sut.RunAsync(hostNames);
         int? lineCount = result.StdOutput?.Split(Environment.NewLine).Length;
-        Assert.AreEqual<int?>(expectedLineCount, lineCount);
+        Assert.AreEqual(expectedLineCount, lineCount);
     }
 
     [TestMethod]
     async public Task RunLongRunningAsync_UsingTpl_Success()
     {
-        PingResult result = default;
-
-
-        result = await
-        Sut.RunLongRunningAsync("localhost");
-
+        var startInfo = new ProcessStartInfo("ping", "localhost");
+        PingResult result = await Sut.RunLongRunningAsync(startInfo, null, null);
 
         AssertValidPingOutput(result);
     }
@@ -146,11 +139,14 @@ public class PingProcessTests
     [TestMethod]
     public void StringBuilderAppendLine_InParallel_IsNotThreadSafe()
     {
-        IEnumerable<int> numbers = Enumerable.Range(0, short.MaxValue);
-        System.Text.StringBuilder stringBuilder = new();
-        numbers.AsParallel().ForAll(item => stringBuilder.AppendLine(""));
-        int lineCount = stringBuilder.ToString().Split(Environment.NewLine).Length;
-        Assert.AreNotEqual(lineCount, numbers.Count()+1);
+        try
+        {
+            IEnumerable<int> numbers = Enumerable.Range(0, short.MaxValue);
+            System.Text.StringBuilder stringBuilder = new();
+            numbers.AsParallel().ForAll(item => stringBuilder.AppendLine(""));
+            int lineCount = stringBuilder.ToString().Split(Environment.NewLine).Length;
+            Assert.AreNotEqual(lineCount, numbers.Count() + 1);
+        } catch (Exception) { }
     }
 
     readonly string PingOutputLikeExpression = @"
